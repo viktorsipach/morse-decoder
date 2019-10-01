@@ -25,6 +25,7 @@ const MORSE_TABLE = {
     '-..-':   'x',
     '-.--':   'y',
     '--..':   'z',
+    '|':      ' ',
     '.----':  '1',
     '..---':  '2',
     '...--':  '3',
@@ -35,12 +36,22 @@ const MORSE_TABLE = {
     '---..':  '8',
     '----.':  '9',
     '-----':  '0',
+       
 };
 
 function decode(expr) {
-    // write your solution here
+    let decodedStr = expr.split(/(\d{10})/g).join(' ').replace(/10/g , '.').replace(/11/g , '-').replace(/0/g , '').split(' ').join(' ').replace(/\*{10}/g , '|').split(' ').map(function(item ){
+        for ( let key in MORSE_TABLE) {
+     if(key == item) {
+       return item=MORSE_TABLE[key];
+     } 
+   }
+   }).join('');
+ 
+   return decodedStr;
 }
 
+   
 module.exports = {
     decode
 }
